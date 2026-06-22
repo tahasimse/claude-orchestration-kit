@@ -79,6 +79,8 @@ claude-orchestration-kit/
 │   │   ├── planner.md        ← read-only, opus
 │   │   ├── builder.md        ← full tools, sonnet
 │   │   └── reviewer.md       ← read-only + tests, opus
+│   ├── skills/
+│   │   └── autopilot/        ← /autopilot: plan once → run unattended to done
 │   └── settings.json         ← safe read-only allowlist (fewer permission prompts)
 └── docs/
     ├── PLAYBOOK.md           ← the orchestration protocol + task-type workflows + gates
@@ -160,6 +162,30 @@ The PLAYBOOK maps task types to workflows so small work stays light:
 | architectural / risky | planner presents options → record an ADR → build |
 
 ---
+
+## Overnight / autonomous mode — `/autopilot`
+
+The default flow has two human gates (plan + merge). For unattended runs — you start it and walk
+away, or hand it off before bed — the kit ships a skill that collapses to **one** gate:
+
+```
+/autopilot <what you want done>
+```
+
+- **Phase 1 — plan + GO.** It reads the state, produces a concrete plan (with options when there's
+  a real fork), and **stops for a single GO**. You pick and approve.
+- **Phase 2 — unattended.** After GO it runs to completion **without asking again**: it makes the
+  most plan-consistent choice on any ambiguity and logs the assumption.
+
+Because nobody is watching (and this pairs with a `bypassPermissions` session), Phase 2 imposes
+its own safety rails: **branch-only** (never merges to `main`, never deploys, never does anything
+irreversible — the result waits on a branch for your morning review), **tests are the gate** (no
+broken tree is ever called "done"), **anti-spin** (a wall that won't fall after ~3 tries gets
+logged as blocked and skipped, not chewed on all night), and a **morning report** at
+`docs/AUTOPILOT-<date>.md`. A clean early finish is a success — it won't invent make-work.
+
+> Trade-off, stated plainly: you swap the pre-merge human review for unattended throughput. The
+> reviewer subagent + green tests are the safety net; the branch is the morning checkpoint.
 
 ## Design principles (the "why")
 
