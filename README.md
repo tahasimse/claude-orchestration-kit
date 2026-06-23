@@ -162,25 +162,64 @@ code wins and the doc gets fixed.
 
 ---
 
-## Install into a project
+## Get started — download, install, run
 
-From the repo you want to run with agents:
+**1. Get the kit.** Clone it (or download the ZIP on GitHub → green **Code** button → **Download ZIP**):
 
 ```bash
-# from your project root
-cp -R /path/to/claude-orchestration-kit/.claude .
-cp -R /path/to/claude-orchestration-kit/docs .
-cp /path/to/claude-orchestration-kit/CLAUDE.md .   # or merge into an existing CLAUDE.md
+git clone https://github.com/tahasimse/claude-orchestration-kit
 ```
 
-Then do the one-time setup:
-1. Open `CLAUDE.md` and fill in the **"Project specifics"** block — build/test/lint/run commands,
-   gotchas, commit + branch conventions. This is what stops every agent from rediscovering how to
-   build your project.
-2. Fill in `docs/STATE.md` — current branch, one-paragraph state, and the work queue.
-3. Optional: write your first real ADR in `docs/decisions/` for any choice already settled.
+**2. Copy three things into your own project.** That's all the kit *is* — `.claude/`, `docs/`, and
+`CLAUDE.md`. (Leave the kit's own `README.md` / `LICENSE` behind; your project doesn't need them.)
 
-That's it. `.claude/agents/*` are picked up automatically by Claude Code.
+```bash
+# run these from YOUR project's root folder.
+# /path/to/claude-orchestration-kit = the folder you just cloned.
+cp -R /path/to/claude-orchestration-kit/.claude   .
+cp -R /path/to/claude-orchestration-kit/docs      .
+cp    /path/to/claude-orchestration-kit/CLAUDE.md .
+```
+
+After this your project looks like:
+
+```
+your-project/
+├── .claude/
+│   ├── agents/        planner · builder · reviewer
+│   ├── skills/        autopilot
+│   └── settings.json  safe read-only allowlist
+├── docs/              PLAYBOOK · STATE · CHANGELOG · decisions/ · templates/
+└── CLAUDE.md          the spine — read at the start of every session
+```
+
+> **Already have a `.claude/` folder?** Merge, don't overwrite — keep your own `settings.local.json`,
+> and if you already have a `CLAUDE.md`, merge the two rather than clobbering it.
+
+**3. Fill in two files (one-time).**
+- `CLAUDE.md` → the **"Project specifics"** block: your build / test / lint / run commands, gotchas,
+  commit + branch conventions. This is what stops every agent from re-discovering how to build your project.
+- `docs/STATE.md` → current branch, a one-paragraph state, and the work queue. (Until you do, its
+  `<…>` placeholders mark it *uninitialized* — the kit treats that as a "stop and get oriented first" signal.)
+
+**4. Start Claude in the project and hand it a task.** Open a terminal **inside your project folder**
+and launch Claude Code:
+
+```bash
+cd /path/to/your-project
+claude
+```
+
+The main session **is** the Orchestrator. Just tell it what to do:
+
+```
+We're doing the task at the top of STATE.md. Coordinate it per the PLAYBOOK.
+```
+
+…and it runs the plan → build → review loop, stopping only at the two gates. See **Run a task** just
+below for what each step does, or **`/autopilot`** further down to hand off a whole job overnight.
+
+That's it — `.claude/agents/*` and `.claude/skills/*` are picked up automatically.
 
 ---
 
