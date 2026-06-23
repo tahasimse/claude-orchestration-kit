@@ -32,6 +32,7 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **Verification is the definition of done.** A task is done when automated checks are green, not when code is written. Don't hand a "please verify manually" TODO back to the human if you can run the check yourself.
 - **One gate before building, one before merging.** Get plan sign-off; get merge sign-off. Automate everything in between.
 - **Keep context cheap.** Read STATE + decisions + the in-scope files — not the whole history. Subagents start fresh; give each exactly what it needs, no more.
+- **Match power to the task.** Keep a calm baseline; escalate by *delegating*, not by maxing out every turn. Cheap model + low effort for trivial work; Opus + high/xhigh effort (or a Workflow) for hard reasoning, tricky bugs, and reviews. When unsure between two tiers, pick the higher. Full policy: `docs/PLAYBOOK.md` → "Model & power routing".
 
 ## Project specifics — FILL THIS IN per project
 - **Stack:** <languages / frameworks>

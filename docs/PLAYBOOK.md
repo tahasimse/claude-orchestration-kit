@@ -40,6 +40,31 @@ Each subagent ends its hand-back with a clear status so the Orchestrator knows t
 - **Right model for the job.** planner/reviewer reason hard (default `opus`); builder runs long and mechanical (default `sonnet`). Tune in each agent's frontmatter `model:`.
 - **Subagents start cold.** Hand each one exactly the plan, files, and constraints it needs — they don't share the Orchestrator's context.
 
+## Model & power routing (generous, but matched to the task)
+
+The human keeps a calm baseline (e.g. Opus + medium effort). The Orchestrator does NOT max itself
+out on every turn — it **escalates by delegating**, matching the power of each spawned unit to that
+unit's difficulty. Bias UP when unsure (generosity); bias down only when the work is genuinely trivial.
+
+| Unit of work | Power to use |
+|--------------|--------------|
+| Trivial mechanical — format, rename, doc tweak, scaffold, one-liner | cheapest: Haiku/Sonnet subagent, low effort, no workflow |
+| Normal implementation — a feature, a test suite, one rung | Sonnet worker, default effort |
+| Hard reasoning — architecture, tricky algorithm, a bug that didn't fall on the first try, correctness-critical logic, **the review stage** | Opus, raise effort to high/xhigh |
+| Complex / broad / needs verification — audit, migration, design-with-options, exhaustive review | reach for a **Workflow**: fan out, adversarially verify, synthesize — hardest stages on Opus + xhigh effort |
+
+How to apply the power:
+- **Model per subagent:** pass `model: haiku|sonnet|opus` when you spawn (the Agent tool takes a
+  per-spawn `model`). Each agent file's `model:` is only the *default* — override it for the actual task.
+- **Effort + workflows:** the plain Agent tool can't raise a single subagent's effort, so escalate
+  deep reasoning by running a **Workflow** (its `agent()` calls take per-stage `model` and `effort`,
+  up to `xhigh`) — or tell the human the task is worth a higher-effort session.
+- **Don't hesitate to open the big tools.** For genuinely complex work, a Workflow with xhigh-effort
+  Opus verify/judge stages is the right spend, not extravagance.
+
+**Generosity rule:** between two tiers, pick the higher. The sin to avoid is **under-powering a hard
+task**, not over-spending on an easy one.
+
 ## Anti-patterns this kit exists to kill
 - ❌ A human copy-pasting prompts between separate chat windows to move work between roles.
 - ❌ One giant append-only doc that every session re-reads in full (token tax on dead history).

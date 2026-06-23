@@ -79,6 +79,17 @@ If the project has the orchestration kit's subagents (`planner` / `builder` / `r
 delegate to them: planner for any unit you didn't fully scope in Phase 1, builder to implement,
 reviewer on the diff before the final commit of each unit. Otherwise do the work directly.
 
+### Match power to the task (generous escalation)
+Don't run every rung at the same power. Judge each unit's difficulty and match it — biasing UP when
+unsure (generosity), down only when the work is genuinely trivial:
+- **Trivial** (scaffold, rename, doc, one-liner): cheapest model (Haiku/Sonnet), low effort.
+- **Normal rung** (a feature + its tests): Sonnet, default effort.
+- **Hard** (tricky algorithm, correctness-critical logic, a bug that didn't fall on the first try,
+  the review pass): Opus, and raise effort — escalate deep reasoning by running it as a **Workflow**
+  whose hardest stages use Opus + `xhigh` effort (a plain subagent spawn can set `model` but not effort).
+- **Generosity rule:** between two tiers, pick the higher. Under-powering a hard rung at 3am is the
+  expensive mistake; a stubborn bug is a signal to escalate, not to grind on the cheap tier.
+
 ---
 
 ## Stop conditions
