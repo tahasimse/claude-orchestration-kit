@@ -1,5 +1,9 @@
 # STATE — <project name>
 
+> ⚠️ **UNINITIALIZED** — this file still has `<…>` placeholders. Until they're filled, the project is
+> not oriented: the Orchestrator must reconstruct and populate STATE (branch, one-line state, queue)
+> from `git log` / `git status` **before** coordinating any task. Delete this banner once STATE is real.
+>
 > The single always-read file. Keep it **small**: current state + what's next.
 > History goes in `CHANGELOG.md`. Rationale goes in `decisions/`. If this file grows past
 > roughly one screen, you're putting history or decisions in the wrong place.

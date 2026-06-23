@@ -13,8 +13,15 @@ The operating manual for the **Orchestrator** (the main session). Read this befo
 The Orchestrator is the only thing that talks to the human and the only thing that spawns
 subagents. No prompts are copy-pasted between chat windows — the main session drives the whole flow.
 
+**Delegate one builder per coherent artifact, not per commit.** For tightly-coupled incremental work
+— a parser that grows rung by rung, a schema that evolves — a single author produces a far more
+consistent codebase than a fresh-context builder per commit (cold builders re-derive the design and
+drift in naming/structure). Split work across builders only when the pieces are genuinely independent;
+keep one author when they grow together. Either way, gate with the reviewer at the end. Delegation is
+the default lever, not an unconditional one.
+
 ## Lifecycle of a task
-1. **Frame** — Human gives a goal (use `docs/templates/task-brief.md`). Orchestrator reads `STATE.md` + `decisions/`, confirms scope, and picks a workflow (see below).
+1. **Frame** — Human gives a goal (use `docs/templates/task-brief.md`). Orchestrator reads `STATE.md` + `decisions/`, confirms scope, and picks a workflow (see below). **Init gate:** if `STATE.md` still contains `<…>` template placeholders, the project is *uninitialized* — stop and populate STATE (branch, one-line state, queue) from `git log` / `git status` before coordinating anything. A placeholder STATE means "not oriented yet," not "nothing to do."
 2. **Plan** — Spawn `planner`. Relay the plan to the human.
    ⛔ **GATE 1 — human approves the plan.** No building before sign-off on anything non-trivial.
 3. **Build** — Spawn `builder` with the approved plan. It codes, tests until green, commits.
@@ -32,6 +39,11 @@ Automate the mechanics of steps 2–4. Only stop at the two ⛔ gates.
 | Architectural / risky | plan presents **options** for the human to choose; record the choice as an ADR **before** building | The decision must precede the code. |
 
 Each subagent ends its hand-back with a clear status so the Orchestrator knows the phase is done.
+
+**Review cadence scales the same way.** Run a per-unit review for risky or independent units; a single
+batch review at the end is fine — and far cheaper — for a series of low-risk, tightly-coupled rungs.
+Don't pay for seven reviews when one adversarial pass over the whole diff catches what matters. Match
+the ceremony to the risk.
 
 ## Standing rules
 - **Decisions are frozen** (`docs/decisions/`). Respect them; supersede via a new ADR, never silently.

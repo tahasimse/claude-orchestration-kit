@@ -21,6 +21,9 @@ directly and relays only what the human needs to decide.
 
 ## Read order at session start
 1. **`docs/STATE.md`** — current state + work queue. Always read first. Small by design.
+   **Init gate:** if it still contains `<…>` template placeholders, the project is *uninitialized* —
+   reconstruct and populate STATE (branch, one-line state, queue) from `git log` / `git status` before
+   coordinating anything. A placeholder STATE is a hard "you are not oriented yet" stop, not noise to read past.
 2. **`docs/decisions/`** — frozen architecture decisions. Do not re-litigate these.
 3. Only the code files relevant to the task. **Code is the source of truth; docs are the index.**
 
@@ -35,6 +38,11 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **Match power to the task.** Keep a calm baseline; escalate by *delegating*, not by maxing out every turn. Cheap model + low effort for trivial work; Opus + high/xhigh effort (or a Workflow) for hard reasoning, tricky bugs, and reviews. When unsure between two tiers, pick the higher. Full policy: `docs/PLAYBOOK.md` → "Model & power routing".
 
 ## Project specifics — FILL THIS IN per project
+
+> This block is the **only** part of CLAUDE.md you edit per project. Do not overwrite the spine above
+> it with project content, and don't restate the protocol here — the protocol's single home is
+> `docs/PLAYBOOK.md`. One home per fact; this file stays thin because it loads into every context.
+
 - **Stack:** <languages / frameworks>
 - **Build:** `<command>`
 - **Test:** `<command>`

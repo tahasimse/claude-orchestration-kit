@@ -22,6 +22,8 @@ no human is watching during Phase 2, you impose strict safety rails on yourself.
 1. Take the user's request (their message / the skill args) as the goal.
 2. Read context: `docs/STATE.md` and `docs/decisions/` **if they exist**, plus the code files in
    scope. Run `git status` and `git log --oneline -10` to orient. Be quick but real — don't plan blind.
+   **If STATE.md is still template placeholders (`<…>`), the repo is uninitialized** — reconstruct the
+   real state from `git log` / `git show` before planning; don't trust the placeholder over the repo.
 3. Produce a concrete plan:
    - Restate the goal and the **Definition of Done** (observable, testable).
    - An ordered **task breakdown** — each unit independently committable and verifiable.
@@ -44,10 +46,14 @@ If a decision comes up, choose the option most consistent with the approved plan
 decisions, and the existing code patterns. **Log the assumption** in the run report and keep
 going. Stopping to ask is failure for this skill.
 
-### Stay reversible — branch only
+### Stay reversible — branch by default
 - Work on a dedicated branch: `git switch -c autopilot/<short-slug>` (or the branch the user named).
 - **Never** push to `main`, merge into a shared branch, open a production PR, deploy, delete data,
-  rewrite published history, or take any outward-facing / irreversible action. Those wait for morning.
+  rewrite published history, or take any outward-facing / irreversible action unattended. Those wait for morning.
+- **Greenfield exception — name it, don't resolve it by feel:** if the repo is brand-new with no shared
+  history to protect *and* the user explicitly authorized committing to `main`, still **prefer a branch**
+  (so the morning merge gate stays meaningful). If you do commit to `main`, say so and log it. Don't
+  silently contradict the user, and don't silently obey them into deleting the only gate — surface the tension.
 - `bypassPermissions` means nothing will stop a dangerous command but you — so don't run one.
 
 ### Tests are the gate
@@ -64,7 +70,7 @@ blocked with the full error, skip to the next independent unit, and surface it i
 report. Do not burn the night on one wall.
 
 ### Keep a morning report
-Maintain a run log at `docs/AUTOPILOT-<date>.md` (or append to STATE / CHANGELOG): each unit
+Maintain a run log at `docs/AUTOPILOT-<date>-<branch-slug>.md` (or append to STATE / CHANGELOG): each unit
 done, every assumption made, anything blocked, final test status, and the branch name. End the
 run with a summary message: what shipped, what's on the branch, what's blocked, and what the user
 should review first.
@@ -74,10 +80,19 @@ Do only the approved scope (plus queued items if that was the agreed scope). No 
 creep. Adjacent work is allowed only when strictly required to make the approved scope pass its
 tests — and it gets logged.
 
-### Use the team if present
-If the project has the orchestration kit's subagents (`planner` / `builder` / `reviewer`),
-delegate to them: planner for any unit you didn't fully scope in Phase 1, builder to implement,
-reviewer on the diff before the final commit of each unit. Otherwise do the work directly.
+### Use the team if present — but not blindly
+If the project has the orchestration kit's subagents (`planner` / `builder` / `reviewer`), use them —
+with judgment about *when*:
+- **Delegate one builder per coherent artifact, not per commit.** For tightly-coupled incremental work
+  (a parser/evaluator that grows rung by rung), a single author stays far more consistent than a fresh
+  cold builder per commit, which re-derives the design and drifts. Split across builders only when the
+  pieces are genuinely independent.
+- **Reviewer is the highest-value role — bias toward it, and make it EXECUTE.** Run it on risky or
+  independent units; for a series of low-risk coupled rungs, one comprehensive adversarial review at the
+  end is fine and far cheaper than a review per rung. Have it **run the program with adversarial inputs**
+  (oversized / empty / malformed / boundary / overflow), not just read the diff — that is what catches
+  the bugs green tests miss.
+- Otherwise (no kit subagents, or trivial work) do it directly.
 
 ### Match power to the task (generous escalation)
 Don't run every rung at the same power. Judge each unit's difficulty and match it — biasing UP when
