@@ -11,6 +11,58 @@ didn't.
 
 ---
 
+## Before you start — Claude Code settings
+
+The kit assumes a few Claude Code settings, mostly so the workflow — and especially the overnight
+**`/autopilot`** run — flows without you babysitting it. Flip them in the `/config` menu, or just
+pin the file-backed ones by pasting this into your **global** `~/.claude/settings.json`:
+
+```json
+{
+  "model": "opus",
+  "effortLevel": "medium",
+  "enableWorkflows": true,
+  "autoCompactEnabled": true,
+  "fileCheckpointingEnabled": true,
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": ["Bash", "Read", "Edit", "Write"],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(sudo *)"
+    ]
+  }
+}
+```
+
+What each one actually buys you:
+
+| Setting | Why it matters here |
+|---|---|
+| `model: opus` | The Orchestrator's brain. It stays sharp and **delegates** cheaper work to Sonnet/Haiku subagents — you don't pay Opus for everything. |
+| `effortLevel: medium` | A calm baseline. The deep thinking gets escalated per task, not cranked on every turn. |
+| `enableWorkflows: true` | Lets the Orchestrator fan out into a multi-agent workflow when a task is genuinely big. |
+| `defaultMode: acceptEdits` | Stops the constant "can I edit this file?" prompts, so a run isn't blocked every few seconds. |
+| `allow` / `deny` | No routine prompts — **but** a safety net: `rm -rf`, force-push, and `sudo` stay blocked even when nobody's watching. |
+| `autoCompactEnabled: true` | Long sessions (and overnight runs) don't hit the context wall and die. |
+| `fileCheckpointingEnabled: true` | Snapshots before edits — `/rewind` can undo anything an unattended run did. |
+
+A few more are **on by default** — just confirm them in `/config`: **Thinking mode** (reasoning),
+the **Ultracode keyword trigger** (type `ultracode` in a prompt to force maximum effort + workflows
+for that turn), and **Session recap** (a catch-up summary when you return to a finished autopilot run).
+
+> ⚠️ **Don't reach for `bypassPermissions` if you want the `deny` safety net.** `bypassPermissions`
+> skips *all* permission checks, so the `rm -rf` / force-push guards stop applying. `acceptEdits`
+> gives you the same "no nagging" feel while keeping the guardrails — which matters most when
+> `/autopilot` is running while you sleep.
+
+Everything else (theme, progress bar, turn duration, auto-update channel, …) is personal taste —
+the defaults are fine.
+
 ## Why this exists
 
 The naive way to use a coding agent is one long chat: "build me X." It loses context, re-argues
