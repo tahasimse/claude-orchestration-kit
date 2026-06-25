@@ -36,6 +36,7 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **One gate before building, one before merging.** Get plan sign-off; get merge sign-off. Automate everything in between.
 - **Keep context cheap.** Read STATE + decisions + the in-scope files — not the whole history. Subagents start fresh; give each exactly what it needs, no more.
 - **Match power to the task.** Keep a calm baseline; escalate by *delegating*, not by maxing out every turn. Cheap model + low effort for trivial work; Opus + high/xhigh effort (or a Workflow) for hard reasoning, tricky bugs, and reviews. When unsure between two tiers, pick the higher. Full policy: `docs/PLAYBOOK.md` → "Model & power routing".
+- **Inline vs delegate — route by context cost.** Do tiny, self-contained work you already have the context for *inline* (a one-line edit, a rename). **Delegate anything exploratory or context-heavy** — "find where this bug comes from," tracing, multi-file reads, sizable builds — so the disposable reading lands in a throwaway subagent context instead of bloating yours and being re-sent every turn. Litmus test: *is the reading disposable?* Full rule: `docs/PLAYBOOK.md` → "Inline vs delegate".
 
 ## Project specifics — FILL THIS IN per project
 

@@ -45,6 +45,28 @@ batch review at the end is fine — and far cheaper — for a series of low-risk
 Don't pay for seven reviews when one adversarial pass over the whole diff catches what matters. Match
 the ceremony to the risk.
 
+## Inline vs delegate — route by context cost
+
+"Scale ceremony to risk" has a twin: **scale delegation to context cost.** Before doing a unit of
+work yourself, ask one question — *would doing it pull material into my context that I won't need again?*
+
+| The work | Do it… | Why |
+|----------|--------|-----|
+| One-line edit, rename, doc tweak — in a file you already have loaded | **inline** | spawning costs more (cold start + re-read) than the work itself |
+| "Find where/why this bug comes from," trace how X works, search the repo | **delegate** | the *reading* is the cost, and it's disposable — most of what you read is irrelevant to the answer |
+| A feature, multiple files, a test suite | **delegate** | a cold worker absorbs the files in its own throwaway context |
+| Any review / verification | **delegate** | needs execution + fresh eyes |
+
+The litmus test: **is the reading disposable?** If finding the answer means wading through a lot you'll
+never reference again, delegate — let that wading happen somewhere you can throw away, and get back a
+compact result instead of tens of thousands of tokens of file-reading stuck in your context and re-sent
+every turn after. If you can do it with what's already loaded, in a couple of lines, just do it.
+
+This is the hybrid the kit runs by default. The two extremes live on separate branches: this
+context-aware default (`main`), and **`full-delegate`** — delegate *everything*, even the 100-token job,
+which only pays off when the project is so large that minimizing the supervisor's context is worth the
+spawn overhead on every task.
+
 ## Standing rules
 - **Decisions are frozen** (`docs/decisions/`). Respect them; supersede via a new ADR, never silently.
 - **Code = truth, docs = index.** Keep `STATE.md` small and honest; trust the repo over the doc.
