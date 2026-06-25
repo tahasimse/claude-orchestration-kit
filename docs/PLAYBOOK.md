@@ -2,6 +2,11 @@
 
 The operating manual for the **Orchestrator** (the main session). Read this before coordinating a task.
 
+> **Full-delegate variant (this branch).** The Orchestrator is a *pure supervisor* — it delegates
+> *all* planning and never reads source; it reads only worker reports + STATE + decisions. The
+> lifecycle below is unchanged except the Orchestrator **always** spawns `planner` (never writes the
+> plan itself). Profile: `.claude/agents/orchestrator.md`. Rationale + trade-offs: `docs/FULL-DELEGATE.md`.
+
 ## Roles
 | Role | Lives in | Tools | Job |
 |------|----------|-------|-----|

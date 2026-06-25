@@ -5,6 +5,10 @@ as a **team of agents** instead of one chat. Drop it into any repo and you get a
 pipeline — Orchestrator, Planner, Builder, Reviewer — with thin, layered project memory that
 keeps token cost low and decisions from drifting.
 
+> 🧪 **You're on the `full-delegate` branch** — an experimental variant where the main session is a
+> *pure supervisor* that delegates even planning and never reads source code. See
+> [`docs/FULL-DELEGATE.md`](docs/FULL-DELEGATE.md) for what it changes and when to use it vs. `main`.
+
 Built from lessons learned coordinating a full microservice project (Angular + Spring + polyglot
 persistence + ML bots) entirely through Claude agents. It distills what worked, and fixes what
 didn't.
