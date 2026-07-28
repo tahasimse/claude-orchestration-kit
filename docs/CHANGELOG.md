@@ -13,8 +13,25 @@
 
 <!-- New entries go directly below this line. -->
 
+## 2026-07-29 — Reframe as a snapshot: `main` stays installable, ADR 0009 supersedes 0002 ✅
+- **Commit(s):** this branch, on top of `fa4fc0f`
+- **What:** `0002` had put the self-hosting split on a path to `main`. Applied there it turns the
+  install into copy-then-undo and, less visibly, ships this repo's frozen decisions into a copier's
+  project — where `CLAUDE.md` tells their agent those decisions are binding. `0009` supersedes it:
+  `main` stays a clean template, and the demo lives here, on `self-host`, cut from `main` at
+  `0c9ac22` and never merged. Branch renamed `docs/self-host` → `self-host`, since it holds an idea
+  rather than staging work. README gains a snapshot banner pointing installers back to `main`;
+  STATE says plainly that it is a snapshot and expects to fall behind.
+- **Decisions touched:** `0009` (new, accepted). `0002` marked superseded, text kept — its
+  diagnosis of the template-versus-project conflict still stands, only the *where* changed.
+- **Verified:** `git merge-base self-host main` = `0c9ac22`, matching what the branch claims.
+  `main` is untouched at `0c9ac22` and equal to `origin/main`; nothing pushed. `LICENSE` still
+  GPL-3.0.
+- **Left for human:** Gate 2 on the one commit `main` does need — the README link to this branch.
+  Decide `0008`. Queue #2 (measurement) is still the real gap.
+
 ## 2026-07-29 — The kit runs on itself: live STATE, ADRs 0002–0008, backfilled CHANGELOG ✅
-- **Commit(s):** `fa4fc0f` on branch `docs/self-host`
+- **Commit(s):** `fa4fc0f` on branch `self-host`
 - **What:** Resolved the template-versus-project conflict that had kept this repo from following
   its own process. The distributed blanks moved to `docs/templates/state-template.md` and
   `changelog-template.md`; `docs/STATE.md` and `docs/CHANGELOG.md` at their canonical paths are now
@@ -29,9 +46,11 @@
   PLAYBOOK Frame step stops firing on this repo. `docs/templates/state-template.md` still carries
   the placeholders and the UNINITIALIZED banner, so a copier still gets the gate. Manual read-through
   of the install path against the new layout.
-- **Left for human:** Gate 2 (merge `docs/self-host` into `main`). Decide `0008` — `LICENSE` is
-  untouched and the kit remains GPL-3.0 until that call is made. Queue item #2 (measurement) is the
-  next real gap: every efficiency claim in the README is still an adjective.
+- **Left for human:** Gate 2 — but **not** a merge. This branch stays unmerged as a snapshot, so
+  that `main` keeps a one-step install (`decisions/0002`, revised); what `main` needs is a link to
+  it. Decide `0008` — `LICENSE` is untouched and the kit remains GPL-3.0 until that call is made.
+  Queue item #2 (measurement) is the next real gap: every efficiency claim in the README is still
+  an adjective.
 
 ## 2026-06-25 — Route inline vs delegate by context cost ✅
 - **Commit(s):** `0c9ac22`

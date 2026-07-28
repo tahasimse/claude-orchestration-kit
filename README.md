@@ -9,10 +9,19 @@ Built from lessons learned coordinating a full microservice project (Angular + S
 persistence + ML bots) entirely through Claude agents. It distills what worked, and fixes what
 didn't.
 
-**This repo runs on the kit.** `docs/STATE.md` is a live work queue with named debt,
-`docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds the frozen ADRs behind
-every choice below — including the one still open. If you want to know whether the process is worth
-copying, read those three before the prose.
+> ## 📸 You are on the `self-host` snapshot — don't install from here
+>
+> This branch is **the kit run on itself**, frozen at the point it was cut from `main` (`0c9ac22`).
+> It exists to be read, not copied: `docs/STATE.md` is a live work queue with named debt,
+> `docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds seven frozen ADRs
+> behind the choices this README describes — including the one still open. If you want to judge
+> whether the process is worth copying, read those three before the prose.
+>
+> **To install the kit, use [`main`](https://github.com/tahasimse/claude-orchestration-kit).**
+> There `docs/STATE.md` and `docs/CHANGELOG.md` are blanks, so the install is just the copy —
+> no resetting, and none of this repo's own decisions land in your project.
+>
+> This branch is not maintained and will fall behind `main`. That is what a snapshot does.
 
 ---
 

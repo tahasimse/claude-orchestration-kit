@@ -20,13 +20,16 @@ Template: [`../templates/adr-template.md`](../templates/adr-template.md).
 | # | Decision | Status |
 |---|----------|--------|
 | [0001](0001-record-architecture-decisions.md) | Record architecture decisions | accepted |
-| [0002](0002-run-the-kit-on-itself.md) | Run the kit on itself; ship the blanks as templates | accepted |
+| [0002](0002-run-the-kit-on-itself.md) | Run the kit on itself; ship the blanks as templates | superseded by 0009 |
 | [0003](0003-one-builder-no-layer-split.md) | One Builder, no backend/frontend split | accepted |
 | [0004](0004-two-human-gates.md) | Two human gates: plan and merge | accepted |
 | [0005](0005-memory-layered-by-lifetime.md) | Memory layered by lifetime, not by topic | accepted |
 | [0006](0006-model-and-power-routing.md) | Match model power to the unit of work | accepted |
 | [0007](0007-inline-vs-delegate-hybrid-default.md) | Route inline vs delegate by context cost | accepted |
 | [0008](0008-license-apache-2-0.md) | Relicense GPL-3.0 → Apache-2.0 | **proposed** |
+| [0009](0009-self-host-on-a-snapshot-branch.md) | Keep `main` installable; self-host on a snapshot branch | accepted |
 
-> Copied the kit into your own project? Delete `0002`–`0008` and this index — they are *this*
-> repo's decisions, kept here as worked examples of the format. `0001` is the one worth keeping.
+> **This index exists only on the `self-host` branch.** On `main` the folder holds `0001` alone, so
+> a copier's frozen-decisions folder starts empty of anyone else's choices and their numbering
+> starts at `0002` — see [`0009`](0009-self-host-on-a-snapshot-branch.md). If you did copy from
+> here, delete `0002`–`0009` and this index; `0001` is the one worth keeping.

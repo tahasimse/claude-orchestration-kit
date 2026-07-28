@@ -1,7 +1,12 @@
 # 0002 — Run the kit on itself; ship the blanks as templates
 
-- **Status:** accepted
+- **Status:** superseded by [`0009`](0009-self-host-on-a-snapshot-branch.md)
 - **Date:** 2026-07-29
+
+> The conflict named below is real and the diagnosis stands. What `0009` changes is *where* the fix
+> applies: the split lives on this snapshot branch, not on `main`, because applied to `main` it
+> turns the install into a copy-then-undo and ships this repo's frozen decisions into someone
+> else's project.
 
 ## Context
 The kit is a process: thin always-read state, frozen decisions, an append-only history. Until now
