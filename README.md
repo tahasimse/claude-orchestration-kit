@@ -17,7 +17,9 @@ The [`self-host`](https://github.com/tahasimse/claude-orchestration-kit/tree/sel
 same kit, run through its own PLAYBOOK, with a
 [live STATE that names its own debt](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/STATE.md),
 a [real CHANGELOG](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/CHANGELOG.md),
-and [nine frozen ADRs](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host/docs/decisions)
+a [LESSONS file](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/LESSONS.md)
+holding what the kit learned by going wrong,
+and [ten frozen ADRs](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host/docs/decisions)
 — including one superseded by a later decision, and the licence change this repo is now under.
 
 Read it to judge the process; install from here. It is a **frozen snapshot**, kept unmerged on
