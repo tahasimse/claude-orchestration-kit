@@ -303,11 +303,15 @@ logged as blocked and skipped, not chewed on all night), and a **morning report*
 
 ## License
 
-GPL-3.0 — copyleft. You may use, study, share, and modify this kit, but any
-distributed derivative must also be released under the GPL-3.0 and keep its source open.
+Apache-2.0 — permissive. Copy these files into your own repo, private or commercial,
+change them, ship what you build. The only condition is attribution: keep the
+[`NOTICE`](NOTICE) file (or carry its contents in yours) and state significant changes you make.
 See [`LICENSE`](LICENSE) for the full text.
 
-Copyright (C) 2026 tahasimse. This program is free software: you can redistribute it
-and/or modify it under the terms of the GNU General Public License as published by the
-Free Software Foundation, either version 3 of the License, or (at your option) any later
-version. It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+Copyright 2026 tahasimse. Licensed under the Apache License, Version 2.0. Distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+Chosen over copyleft because the kit's whole distribution model is "paste these files into your
+repo," and a copyleft notice on files you are told to paste is friction paid at every adoption.
+Reasoning: [`decisions/0008`](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/decisions/0008-license-apache-2-0.md).
+Releases before 2026-07-29 were GPL-3.0; that grant still stands for anyone who took it.
