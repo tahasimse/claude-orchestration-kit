@@ -26,7 +26,7 @@ the default lever, not an unconditional one.
    ⛔ **GATE 1 — human approves the plan.** No building before sign-off on anything non-trivial.
 3. **Build** — Spawn `builder` with the approved plan. It codes, tests until green, commits.
 4. **Review** — Spawn `reviewer` on the diff. If there are 🔴 findings, loop back to `builder` with them. Repeat until the reviewer's verdict is *ready*.
-5. **Land** — ⛔ **GATE 2 — human approves the merge.** Then merge, move the task out of `STATE.md`'s queue, append an entry to `CHANGELOG.md`, and if a decision was made, add an ADR under `decisions/`.
+5. **Land** — ⛔ **GATE 2 — human approves the merge.** Then merge, move the task out of `STATE.md`'s queue, append an entry to `CHANGELOG.md`, and if a decision was made, add an ADR under `decisions/`. If something went wrong on the way and a rule changed because of it, record the reason in `LESSONS.md` (below).
 
 Automate the mechanics of steps 2–4. Only stop at the two ⛔ gates.
 
@@ -73,6 +73,52 @@ spawn overhead on every task.
 - **Verification is done-ness.** Prefer a check the agent can run over a TODO handed to the human.
 - **Right model for the job.** planner/reviewer reason hard (default `opus`); builder runs long and mechanical (default `sonnet`). Tune in each agent's frontmatter `model:`.
 - **Subagents start cold.** Hand each one exactly the plan, files, and constraints it needs — they don't share the Orchestrator's context.
+
+## Gotchas and lessons — where a rule lives, and why
+
+A project teaches you things by going wrong. Two different things have to be kept, and they have
+different lifetimes — the same split as `STATE.md` vs `CHANGELOG.md`:
+
+| | Lives in | Lifetime |
+|---|---|---|
+| **What an agent must know now** | `CLAUDE.md` → gotchas (or an agent file / this PLAYBOOK) | live, small, pruned when the problem goes away |
+| **Why it ever had to be known** | `LESSONS.md` | append-only, never pruned |
+
+### What earns a place in gotchas
+One test: **without this, would an agent get its first move wrong — whatever its role?** Both
+halves must hold.
+
+| The lesson | Goes to |
+|---|---|
+| Every agent needs it before acting — a footgun in the build, the tools, the branch rules | `CLAUDE.md` → gotchas |
+| Only one role needs it — "the reviewer keeps false-flagging X" | that agent's file, e.g. `.claude/agents/reviewer.md` |
+| It is a protocol rule — cadence, sequencing, when to delegate | this PLAYBOOK |
+| It is a settled choice, not a footgun — "we use Postgres" | an ADR under `decisions/` |
+
+Write gotchas as **imperative and testable**, not as observations: "run tests with JDK 21; the
+default JDK fails," not "tests need JDK 21." Keep the list to about five. Past that, something is
+misrouted — the cap polices the routing, not the list, because `CLAUDE.md` loads into every context
+and every line is paid for on every turn.
+
+### Two ways a gotcha arrives
+- **The human says so.** It goes straight in; the authority is the human, and no investigation is
+  owed. A `LESSONS.md` entry is optional.
+- **An agent discovers it** — something failed and the cause turned out to be general. Here the
+  agent **proposes** and the human confirms at Gate 2, because a wrong gotcha is expensive: it is
+  carried in every context from then on. A `LESSONS.md` entry is **required** — the failure is the
+  reason, and without it the rule can only be obeyed literally, never applied with judgment.
+
+### What counts as a lesson
+Both must be true: **something went wrong** (or the human corrected the agent), **and something
+changed because of it.** No change, no lesson. That filter is what keeps `LESSONS.md` from becoming
+a diary.
+
+Do not read `LESSONS.md` at session start — grep it. The one time to open it is **before changing a
+rule**: edits to the gotchas, this PLAYBOOK, or an agent file. A rule you cannot see the reason for
+is a rule you will quietly undo.
+
+When a footgun is fixed for good, delete the gotcha but leave the lesson, marked `retired`. The
+rule was the temporary thing; the reason is what you keep.
 
 ## Model & power routing (generous, but matched to the task)
 

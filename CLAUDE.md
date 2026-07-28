@@ -27,7 +27,10 @@ directly and relays only what the human needs to decide.
 2. **`docs/decisions/`** — frozen architecture decisions. Do not re-litigate these.
 3. Only the code files relevant to the task. **Code is the source of truth; docs are the index.**
 
-Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it when you need a fact.
+Do NOT read `docs/CHANGELOG.md` or `docs/LESSONS.md` in full — both are append-only history. Grep
+them when you need a fact. One exception: **before changing a rule** — the gotchas below, the
+PLAYBOOK, or an agent file — read `docs/LESSONS.md` first, so you don't undo a rule whose reason
+you never saw.
 
 ## First principles
 - **Code = truth, docs = index.** When a doc and the code disagree, trust the code and fix the doc.
@@ -53,9 +56,9 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **Test:** copy `.claude/`, `docs/` and `CLAUDE.md` into a scratch repo, run `claude`, and confirm the session reads `docs/STATE.md` first and discovers `planner`, `builder`, `reviewer` and `/autopilot`.
 - **Lint / format:** none. Keep prose lines under ~110 columns to match the existing files.
 - **Run locally:** `claude`, from a project root that has the three copied paths.
-- **Gotchas / footguns:**
+- **Gotchas / footguns:** patches to every agent's system prompt — keep to ~5, imperative and testable. Admission test and where the rest goes: `docs/PLAYBOOK.md` → "Gotchas and lessons".
   - This repo is both the template and a live project. The blanks people copy live in `docs/templates/` (`state-template.md`, `changelog-template.md`); `docs/STATE.md` and `docs/CHANGELOG.md` are **real**. Never re-blank them to "fix" the template.
   - `LICENSE` is Apache-2.0 as of `decisions/0008`. `NOTICE` is part of the licence, not decoration — if you add files, they stay under the same terms and `NOTICE` stays shipped. Prior releases remain available under GPL-3.0; the relicense is not retroactive.
   - The README's settings section argues against `bypassPermissions`; the `/autopilot` skill assumes it. Known, tracked as `perm-story` in `STATE.md` — don't silently resolve it in one direction.
 - **Conventions:** conventional commits (`docs:`, `feat(skill):`, `fix:`). Docs in English, for shareability. One home per fact — if you find yourself restating the protocol outside `PLAYBOOK.md`, link instead.
-- **Merge flow:** branch off `main` (`docs/…`, `feat/…`), land at Gate 2 with the human. `origin/full-delegate` is the delegate-everything variant (`docs/decisions/0007`), maintained separately.
+- **Merge flow:** branch off `main` (`docs/…`, `feat/…`, `chore/…`), land at Gate 2 with the human, then delete the work branch. `self-host` and `origin/full-delegate` are **idea branches** (`decisions/0009`) — not maintained, and expected to sit behind `main`.

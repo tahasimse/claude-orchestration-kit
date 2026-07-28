@@ -13,6 +13,27 @@
 
 <!-- New entries go directly below this line. -->
 
+## 2026-07-29 — `LESSONS.md`: keep the reason a rule exists ✅
+- **Commit(s):** `5b58b7c` on `feat/lessons` (mechanism, for `main`); this branch for the kit's own
+  entries and the ADR.
+- **What:** The kit recorded chosen reasoning (ADRs) and delivered work (CHANGELOG), but nothing
+  recorded *learned* reasoning. The first autopilot run produced seven findings that were applied
+  as rules and then survived only in the commit message of `86a01ce`. `LESSONS.md` is the
+  append-only half of a pair whose live half is `CLAUDE.md`'s gotchas — the same lifetime split
+  `0005` already draws between `STATE.md` and `CHANGELOG.md`. Gotchas gained an admission test
+  ("without this, would any agent get its first move wrong?"), a ~5-entry cap and routing for what
+  fails the test. Lessons are filtered by "something went wrong **and** something changed", read
+  only before changing a rule, and retired rather than deleted. Those seven findings are now
+  backfilled here as entries, along with the two lessons from today.
+- **Decisions touched:** `0010` (new, accepted). It also records the dropping of the queued
+  `RUNLOG.md`: its only purpose was to put numbers behind comparative README claims, which a
+  kit-only log cannot do, and the call was that the kit does not have to prove itself.
+- **Verified:** `LESSONS.md` reachable from `CLAUDE.md` read order, the PLAYBOOK Land step and the
+  new PLAYBOOK section; every backfilled entry names the file its rule actually lives in, checked
+  against the repo. `STATE.md` queue no longer references `RUNLOG.md`; `no-numbers` reclassified
+  from pending work to accepted limitation.
+- **Left for human:** Gate 2 on `feat/lessons` → `main`, and on this branch.
+
 ## 2026-07-29 — Relicense GPL-3.0 → Apache-2.0 ✅
 - **Commit(s):** `319a893` on `chore/relicense-apache-2-0` (for `main`); this branch for the ADR
   and the docs that referenced the old licence.

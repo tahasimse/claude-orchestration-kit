@@ -9,8 +9,8 @@
 _Last updated: 2026-07-29 — branch `self-host`, cut from `main` at `0c9ac22`_
 
 ## Now
-- **Branch:** `self-host` — **a frozen snapshot, not a work branch.** It shows the kit run on
-  itself, cut from `main` at `0c9ac22`. It is deliberately **not** merged into `main`, so that
+- **Branch:** `self-host` — **a snapshot, not a work branch.** It shows the kit run on itself, and
+  is re-cut from `main` when there is something new to show. It is deliberately **not** merged into `main`, so that
   `main` stays a clean, installable template: there, `docs/STATE.md` and `docs/CHANGELOG.md` are
   blanks and `cp -R docs .` is all the install needs. Expect this branch to fall behind `main`;
   that is what a snapshot does.
@@ -19,27 +19,29 @@ _Last updated: 2026-07-29 — branch `self-host`, cut from `main` at `0c9ac22`_
   autopilot build (calc evaluator, `86a01ce`) and on the microservice project it was distilled
   from. What `main` cannot show is **the kit running on itself** — a blank template structurally
   cannot carry evidence. That is this branch's whole job: the blanks moved to `docs/templates/`,
-  this file and `CHANGELOG.md` were populated for real, and the seven standing choices were frozen
-  as ADRs `0002`–`0008`. Nothing is broken; no code, no build.
+  this file and `CHANGELOG.md` were populated for real, and the standing choices were frozen as
+  ADRs `0002`–`0010`. `LESSONS.md` carries what the kit learned by going wrong — the first
+  autopilot run's findings had until now survived only in a commit message. Nothing is broken;
+  no code, no build.
 
 ## Work queue (prioritized)
 | # | Task | Type | Status | Blocked by |
 |---|------|------|--------|------------|
-| 1 | Link this snapshot from `main`'s README, so the evidence is reachable without `main` carrying it | docs | awaiting Gate 2 | human |
-| 2 | Run log + measurement: record review rounds, retries and token cost per task in `docs/RUNLOG.md`, so README claims stop being adjectives | feature | queued | — |
-| 3 | Add a `CONTRIBUTING` note: contributions land under Apache-2.0, so a later licence change would need every contributor's consent | docs | queued | — |
-| 4 | Declare `full-delegate` as an idea branch — state the variant it carries and its cut point, instead of rebasing it | docs | queued | 1 |
-| 5 | Reconcile the permission story: README recommends `acceptEdits` for the deny-net, `/autopilot` assumes `bypassPermissions` | fix | queued | — |
-| 6 | Ship a redacted sample `docs/AUTOPILOT-<date>.md` so the morning report is visible before you run one | docs | queued | 2 |
+| 1 | `LESSONS.md` — mechanism on `main`, this repo's own entries here (`decisions/0010`) | feature | awaiting Gate 2 | human |
+| 2 | Add a `CONTRIBUTING` note: contributions land under Apache-2.0, so a later licence change would need every contributor's consent | docs | queued | — |
+| 3 | Reconcile the permission story: README recommends `acceptEdits` for the deny-net, `/autopilot` assumes `bypassPermissions` | fix | queued | — |
+| 4 | Ship a redacted sample `docs/AUTOPILOT-<date>.md` so the morning report is visible before you run one | docs | queued | — |
 
 ## Known issues / debt
-- `perm-story` — README's settings section argues against `bypassPermissions` (it drops the `rm -rf` / force-push deny-net); `/autopilot` line 15 and 57 assume a `bypassPermissions` session. Both positions are defensible, but the kit currently states both without resolving. — **medium** (queue #5)
-- `no-numbers` — Every efficiency claim ("keeps token cost low", "cold starts: none") is unmeasured. — **medium** (queue #2)
-- `branch-labels` — This repo uses branches to **carry ideas**, not only to stage work: `self-host`
-  is the kit run on itself, `full-delegate` is the delegate-everything variant that ADR `0007`
-  rejected. Neither needs maintaining, and neither being behind `main` is a defect. What is missing
-  is the label: nothing tells a visitor which branches are deliberate variants and which would be
-  abandoned work. Declare the idea and the cut point; do not rebase. — **low** (queue #4)
+- `perm-story` — README's settings section argues against `bypassPermissions` (it drops the `rm -rf` / force-push deny-net); `/autopilot` line 15 and 57 assume a `bypassPermissions` session. Both positions are defensible, but the kit currently states both without resolving. — **medium** (queue #3)
+- `no-numbers` — Every efficiency claim ("keeps token cost low", "cold starts: none") is unmeasured,
+  and **unmeasured by choice**: the claims are comparative, so proving them needs the same task run
+  with and without the kit, which is an experiment rather than a log. The copyright holder's call
+  was that the kit does not have to prove itself, so the `RUNLOG.md` that existed only to produce
+  that proof was dropped (`decisions/0010`). Read the README's comparison table as stated design
+  intent, not as a benchmark. — **accepted limitation**, not pending work
+- ~~`branch-labels`~~ — closed 2026-07-29: `main`'s README now declares both idea branches, what
+  each carries and that being behind `main` is expected of them.
 
 ## Quick check reference
 (Full detail in `CLAUDE.md` → "Project specifics".)

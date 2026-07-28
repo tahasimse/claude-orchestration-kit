@@ -11,11 +11,12 @@ didn't.
 
 > ## 📸 You are on the `self-host` snapshot — don't install from here
 >
-> This branch is **the kit run on itself**, frozen at the point it was cut from `main` (`0c9ac22`).
-> It exists to be read, not copied: `docs/STATE.md` is a live work queue with named debt,
-> `docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds nine frozen ADRs
-> behind the choices this README describes — including one superseded by a later decision. If you
-> want to judge whether the process is worth copying, read those three before the prose.
+> This branch is **the kit run on itself**, re-cut from `main` whenever there is something new to
+> show. It exists to be read, not copied: `docs/STATE.md` is a live work queue with named debt,
+> `docs/CHANGELOG.md` is the real task history, `docs/LESSONS.md` records why the kit's rules exist
+> — including the ones this repo learned the hard way — and `docs/decisions/` holds ten frozen ADRs
+> behind the choices this README describes, one of them superseded by a later decision. If you
+> want to judge whether the process is worth copying, read those before the prose.
 >
 > **To install the kit, use [`main`](https://github.com/tahasimse/claude-orchestration-kit).**
 > There `docs/STATE.md` and `docs/CHANGELOG.md` are blanks, so the install is just the copy —
@@ -152,6 +153,7 @@ claude-orchestration-kit/
     ├── PLAYBOOK.md           ← the orchestration protocol + task-type workflows + gates
     ├── STATE.md              ← live state + work queue. SMALL. Read first, every session.
     ├── CHANGELOG.md          ← append-only history. Never read in full; grep it.
+    ├── LESSONS.md            ← why a rule exists. Append-only; read before changing a rule.
     ├── decisions/            ← frozen ADRs — settled choices, never re-litigated
     │   ├── README.md
     │   ├── 0001-record-architecture-decisions.md
@@ -184,7 +186,13 @@ re-reads. Here, state is split by how often it changes and who needs it:
 | `STATE.md` | changes constantly, stays small | **every session, first** |
 | `decisions/` | append rarely, frozen forever | every session (cheap) |
 | `CHANGELOG.md` | append-only, grows forever | only when you need a past fact (grep) |
+| `LESSONS.md` | append-only, grows slowly | before you change a rule (grep otherwise) |
 | `PLAYBOOK.md` | rarely changes | when orchestrating |
+
+The same split runs one level down: what an agent must know *now* lives in `CLAUDE.md`'s gotchas —
+small, and pruned when the problem goes away — while *why it had to be known* goes to `LESSONS.md`
+and stays. A rule whose reason is visible can be applied with judgment; a rule without one can only
+be obeyed literally, or quietly undone. See `PLAYBOOK.md` → "Gotchas and lessons".
 
 Rule of thumb baked into the agents: **code = truth, docs = index.** When they disagree, the
 code wins and the doc gets fixed.
@@ -218,7 +226,7 @@ your-project/
 │   ├── agents/        planner · builder · reviewer
 │   ├── skills/        autopilot
 │   └── settings.json  safe read-only allowlist
-├── docs/              PLAYBOOK · STATE · CHANGELOG · decisions/ · templates/
+├── docs/              PLAYBOOK · STATE · CHANGELOG · LESSONS · decisions/ · templates/
 └── CLAUDE.md          the spine — read at the start of every session
 ```
 
@@ -352,5 +360,9 @@ Copyright 2026 tahasimse. Licensed under the Apache License, Version 2.0. Distri
 
 Chosen over copyleft because the kit's whole distribution model is "paste these files into your
 repo," and a copyleft notice on files you are told to paste is friction paid at every adoption.
+<<<<<<< HEAD
 Reasoning: [`decisions/0008`](docs/decisions/0008-license-apache-2-0.md).
+=======
+Reasoning: [`decisions/0008`](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/decisions/0008-license-apache-2-0.md).
+>>>>>>> feat/lessons
 Releases before 2026-07-29 were GPL-3.0; that grant still stands for anyone who took it.
