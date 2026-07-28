@@ -1,11 +1,7 @@
 # 0008 — Relicense from GPL-3.0 to Apache-2.0
 
-- **Status:** proposed
-- **Date:** 2026-07-29
-
-> ⛔ Needs the copyright holder's decision. Only tahasimse can accept this. Until the status here
-> reads `accepted` and `LICENSE` is actually replaced, the kit remains **GPL-3.0** and that is the
-> license in force. Do not change `LICENSE` on the strength of this file alone.
+- **Status:** accepted
+- **Date:** 2026-07-29 (accepted by the copyright holder, same day)
 
 ## Context
 The kit is licensed GPL-3.0. Its entire distribution model, stated in the README's install section,
@@ -36,7 +32,13 @@ visible. Replace `LICENSE`, update the README's License section, and note the ch
 ## Consequences
 - Removes the adoption blocker: a team can copy the kit in without a licensing conversation.
 - Gives up copyleft permanently. Anyone may fork the kit, extend it and ship the result closed.
-  Given the artifact is prose, this is a small loss for a real gain.
+- **The repackaging scenario is accepted with open eyes.** The argument above — "nobody builds a
+  proprietary product out of a PLAYBOOK" — understates the risk, because here the kit *is* the
+  product, not a component of one. There is a live market in packaged AI workflow setups, and
+  Apache-2.0 lets someone sell this one on with nothing owed but attribution, where GPL-3.0 would
+  have forced them to carry the source. That deterrent is given up knowingly: it was never
+  enforceable by a solo author anyway, so what was really held was a signal, not a protection —
+  and its cost was paid by every honest adopter.
 - Prior releases stay available under GPL-3.0 — relicensing is not retroactive, and anyone who
   already took the GPL grant keeps it.
 - Requires the copyright holder to act, and requires that all contributions to date are that
@@ -49,12 +51,20 @@ visible. Replace `LICENSE`, update the README's License section, and note the ch
 ## Alternatives considered
 - **Stay GPL-3.0** — rejected: the friction is paid at every adoption, and the protection bought is
   near-worthless for prose. It is the safe choice for a *program*, and this is not one.
-- **MIT** — the closest runner-up: shorter and better known than Apache-2.0. Rejected only for the
-  patent grant and the explicit `NOTICE` mechanism, both of which matter more when the target
-  adopter is a company. If brevity is valued over those, MIT is a defensible substitute.
+- **MIT** — the closest runner-up: shorter and better known than Apache-2.0. Rejected for the
+  explicit `NOTICE` mechanism, which is the whole reason to prefer Apache here: it obliges
+  attribution to travel *with the copied files*, which is exactly how this kit moves. The patent
+  grant is the usual second argument for Apache and is nearly weightless for a Markdown kit —
+  there is no patentable invention in a PLAYBOOK. If `NOTICE` did not matter, MIT would win on
+  brevity and recognition.
 - **CC0 / public domain dedication** — rejected: the right shape for pure prose, but it drops
   attribution entirely, and the `.claude/` config files are close enough to software that a
   software license is the safer container.
+- **CC-BY-4.0** — the licence family actually built for prose, and it keeps attribution. Rejected
+  for the same reason as CC0: Creative Commons advises against its licences for software, and this
+  repo is not purely prose — `.claude/settings.json` and the agent files are configuration that a
+  tool executes against. One container for the whole repo, and it should be the one that covers
+  the software-shaped part.
 - **Dual license (GPL for the kit, permissive for the copied files)** — rejected: needs the reader
   to work out which file falls under which license, which is more friction than the copyleft it
   was meant to preserve.

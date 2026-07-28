@@ -26,7 +26,7 @@ Template: [`../templates/adr-template.md`](../templates/adr-template.md).
 | [0005](0005-memory-layered-by-lifetime.md) | Memory layered by lifetime, not by topic | accepted |
 | [0006](0006-model-and-power-routing.md) | Match model power to the unit of work | accepted |
 | [0007](0007-inline-vs-delegate-hybrid-default.md) | Route inline vs delegate by context cost | accepted |
-| [0008](0008-license-apache-2-0.md) | Relicense GPL-3.0 → Apache-2.0 | **proposed** |
+| [0008](0008-license-apache-2-0.md) | Relicense GPL-3.0 → Apache-2.0 | accepted |
 | [0009](0009-self-host-on-a-snapshot-branch.md) | Keep `main` installable; self-host on a snapshot branch | accepted |
 
 > **This index exists only on the `self-host` branch.** On `main` the folder holds `0001` alone, so

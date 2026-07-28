@@ -13,9 +13,9 @@ didn't.
 >
 > This branch is **the kit run on itself**, frozen at the point it was cut from `main` (`0c9ac22`).
 > It exists to be read, not copied: `docs/STATE.md` is a live work queue with named debt,
-> `docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds seven frozen ADRs
-> behind the choices this README describes — including the one still open. If you want to judge
-> whether the process is worth copying, read those three before the prose.
+> `docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds nine frozen ADRs
+> behind the choices this README describes — including one superseded by a later decision. If you
+> want to judge whether the process is worth copying, read those three before the prose.
 >
 > **To install the kit, use [`main`](https://github.com/tahasimse/claude-orchestration-kit).**
 > There `docs/STATE.md` and `docs/CHANGELOG.md` are blanks, so the install is just the copy —
@@ -342,16 +342,15 @@ logged as blocked and skipped, not chewed on all night), and a **morning report*
 
 ## License
 
-> **Under review.** [`decisions/0008`](docs/decisions/0008-license-apache-2-0.md) proposes moving to
-> Apache-2.0, on the argument that copyleft is the wrong container for a kit whose whole
-> distribution model is "copy these files into your repo." It is **proposed, not accepted** — until
-> it is, what follows is the license in force.
-
-GPL-3.0 — copyleft. You may use, study, share, and modify this kit, but any
-distributed derivative must also be released under the GPL-3.0 and keep its source open.
+Apache-2.0 — permissive. Copy these files into your own repo, private or commercial,
+change them, ship what you build. The only condition is attribution: keep the
+[`NOTICE`](NOTICE) file (or carry its contents in yours) and state significant changes you make.
 See [`LICENSE`](LICENSE) for the full text.
 
-Copyright (C) 2026 tahasimse. This program is free software: you can redistribute it
-and/or modify it under the terms of the GNU General Public License as published by the
-Free Software Foundation, either version 3 of the License, or (at your option) any later
-version. It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+Copyright 2026 tahasimse. Licensed under the Apache License, Version 2.0. Distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+Chosen over copyleft because the kit's whole distribution model is "paste these files into your
+repo," and a copyleft notice on files you are told to paste is friction paid at every adoption.
+Reasoning: [`decisions/0008`](docs/decisions/0008-license-apache-2-0.md).
+Releases before 2026-07-29 were GPL-3.0; that grant still stands for anyone who took it.

@@ -13,6 +13,24 @@
 
 <!-- New entries go directly below this line. -->
 
+## 2026-07-29 — Relicense GPL-3.0 → Apache-2.0 ✅
+- **Commit(s):** `319a893` on `chore/relicense-apache-2-0` (for `main`); this branch for the ADR
+  and the docs that referenced the old licence.
+- **What:** `LICENSE` replaced with the canonical Apache-2.0 text fetched from apache.org, `NOTICE`
+  added so attribution travels with copied files, README's License section rewritten. `0008` moved
+  `proposed` → `accepted` and gained two things it had been thin on: the repackaging risk is now
+  stated and accepted rather than waved away (here the kit *is* the product, so copyleft did deter
+  something real — it was just never enforceable by a solo author), and the Apache-over-MIT reason
+  is corrected to `NOTICE` rather than the patent grant, which is near-weightless for a Markdown
+  kit. CC-BY-4.0 added to the alternatives.
+- **Decisions touched:** `0008` (accepted).
+- **Verified:** `LICENSE` is the 11358-byte upstream text, head and tail checked. `NOTICE` ships.
+  No remaining reference to GPL as the licence in force: README, `CLAUDE.md` gotchas and `0008`
+  all updated; the only mentions left are historical ("prior releases stay GPL-3.0"), which is
+  correct — the relicense is not retroactive.
+- **Left for human:** none for the licence itself. New queue item: a `CONTRIBUTING` note, since
+  the "no third-party consent needed" window closes at the first outside PR.
+
 ## 2026-07-29 — Reframe as a snapshot: `main` stays installable, ADR 0009 supersedes 0002 ✅
 - **Commit(s):** this branch, on top of `fa4fc0f`
 - **What:** `0002` had put the self-hosting split on a path to `main`. Applied there it turns the

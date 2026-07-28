@@ -55,7 +55,7 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **Run locally:** `claude`, from a project root that has the three copied paths.
 - **Gotchas / footguns:**
   - This repo is both the template and a live project. The blanks people copy live in `docs/templates/` (`state-template.md`, `changelog-template.md`); `docs/STATE.md` and `docs/CHANGELOG.md` are **real**. Never re-blank them to "fix" the template.
-  - `LICENSE` is GPL-3.0 and stays that way until `docs/decisions/0008` is accepted by the copyright holder. Do not swap it on the strength of the ADR alone.
+  - `LICENSE` is Apache-2.0 as of `decisions/0008`. `NOTICE` is part of the licence, not decoration — if you add files, they stay under the same terms and `NOTICE` stays shipped. Prior releases remain available under GPL-3.0; the relicense is not retroactive.
   - The README's settings section argues against `bypassPermissions`; the `/autopilot` skill assumes it. Known, tracked as `perm-story` in `STATE.md` — don't silently resolve it in one direction.
 - **Conventions:** conventional commits (`docs:`, `feat(skill):`, `fix:`). Docs in English, for shareability. One home per fact — if you find yourself restating the protocol outside `PLAYBOOK.md`, link instead.
 - **Merge flow:** branch off `main` (`docs/…`, `feat/…`), land at Gate 2 with the human. `origin/full-delegate` is the delegate-everything variant (`docs/decisions/0007`), maintained separately.

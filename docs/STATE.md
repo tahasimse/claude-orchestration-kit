@@ -27,7 +27,7 @@ _Last updated: 2026-07-29 — branch `self-host`, cut from `main` at `0c9ac22`_
 |---|------|------|--------|------------|
 | 1 | Link this snapshot from `main`'s README, so the evidence is reachable without `main` carrying it | docs | awaiting Gate 2 | human |
 | 2 | Run log + measurement: record review rounds, retries and token cost per task in `docs/RUNLOG.md`, so README claims stop being adjectives | feature | queued | — |
-| 3 | Decide ADR `0008` (relicense GPL-3.0 → Apache-2.0) | chore | proposed | human |
+| 3 | Add a `CONTRIBUTING` note: contributions land under Apache-2.0, so a later licence change would need every contributor's consent | docs | queued | — |
 | 4 | Declare `full-delegate` as an idea branch — state the variant it carries and its cut point, instead of rebasing it | docs | queued | 1 |
 | 5 | Reconcile the permission story: README recommends `acceptEdits` for the deny-net, `/autopilot` assumes `bypassPermissions` | fix | queued | — |
 | 6 | Ship a redacted sample `docs/AUTOPILOT-<date>.md` so the morning report is visible before you run one | docs | queued | 2 |
