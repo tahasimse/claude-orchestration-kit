@@ -27,7 +27,10 @@ directly and relays only what the human needs to decide.
 2. **`docs/decisions/`** — frozen architecture decisions. Do not re-litigate these.
 3. Only the code files relevant to the task. **Code is the source of truth; docs are the index.**
 
-Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it when you need a fact.
+Do NOT read `docs/CHANGELOG.md` or `docs/LESSONS.md` in full — both are append-only history. Grep
+them when you need a fact. One exception: **before changing a rule** — the gotchas below, the
+PLAYBOOK, or an agent file — read `docs/LESSONS.md` first, so you don't undo a rule whose reason
+you never saw.
 
 ## First principles
 - **Code = truth, docs = index.** When a doc and the code disagree, trust the code and fix the doc.
@@ -49,6 +52,6 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 - **Test:** `<command>`
 - **Lint / format:** `<command>`
 - **Run locally:** `<command>`
-- **Gotchas / footguns:** <e.g. "tests need JDK 21, not the default JDK"; "use the project's wrapper, not the global tool">
+- **Gotchas / footguns:** patches to every agent's system prompt — keep to ~5, imperative and testable. <e.g. "run tests with JDK 21; the default JDK fails"; "use the project's wrapper, not the global tool"> Admission test and where the rest goes: `docs/PLAYBOOK.md` → "Gotchas and lessons".
 - **Conventions:** <commit message style, branch naming, code style, language for code/docs>
 - **Merge flow:** <e.g. "feature branch → PR into develop; never commit to main directly">

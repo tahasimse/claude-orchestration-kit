@@ -157,6 +157,7 @@ claude-orchestration-kit/
     ├── PLAYBOOK.md           ← the orchestration protocol + task-type workflows + gates
     ├── STATE.md              ← live state + work queue. SMALL. Read first, every session.
     ├── CHANGELOG.md          ← append-only history. Never read in full; grep it.
+    ├── LESSONS.md            ← why a rule exists. Append-only; read before changing a rule.
     ├── decisions/            ← frozen ADRs — settled choices, never re-litigated
     │   ├── README.md
     │   └── 0001-record-architecture-decisions.md
@@ -174,7 +175,13 @@ re-reads. Here, state is split by how often it changes and who needs it:
 | `STATE.md` | changes constantly, stays small | **every session, first** |
 | `decisions/` | append rarely, frozen forever | every session (cheap) |
 | `CHANGELOG.md` | append-only, grows forever | only when you need a past fact (grep) |
+| `LESSONS.md` | append-only, grows slowly | before you change a rule (grep otherwise) |
 | `PLAYBOOK.md` | rarely changes | when orchestrating |
+
+The same split runs one level down: what an agent must know *now* lives in `CLAUDE.md`'s gotchas —
+small, and pruned when the problem goes away — while *why it had to be known* goes to `LESSONS.md`
+and stays. A rule whose reason is visible can be applied with judgment; a rule without one can only
+be obeyed literally, or quietly undone. See `PLAYBOOK.md` → "Gotchas and lessons".
 
 Rule of thumb baked into the agents: **code = truth, docs = index.** When they disagree, the
 code wins and the doc gets fixed.
@@ -208,7 +215,7 @@ your-project/
 │   ├── agents/        planner · builder · reviewer
 │   ├── skills/        autopilot
 │   └── settings.json  safe read-only allowlist
-├── docs/              PLAYBOOK · STATE · CHANGELOG · decisions/ · templates/
+├── docs/              PLAYBOOK · STATE · CHANGELOG · LESSONS · decisions/ · templates/
 └── CLAUDE.md          the spine — read at the start of every session
 ```
 
