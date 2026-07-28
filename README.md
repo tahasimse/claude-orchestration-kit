@@ -9,6 +9,25 @@ Built from lessons learned coordinating a full microservice project (Angular + S
 persistence + ML bots) entirely through Claude agents. It distills what worked, and fixes what
 didn't.
 
+### 📸 See the kit run on itself — [`self-host` branch](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host)
+
+This branch is a template, so its `docs/STATE.md` and `docs/CHANGELOG.md` are blanks — that is what
+makes the install a straight copy. A blank cannot show you whether the process actually holds up.
+The [`self-host`](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host) branch can:
+same kit, run through its own PLAYBOOK, with a
+[live STATE that names its own debt](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/STATE.md),
+a [real CHANGELOG](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/CHANGELOG.md),
+and [nine frozen ADRs](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host/docs/decisions)
+— including one still open and one superseded by a later decision.
+
+Read it to judge the process; install from here. It is a **frozen snapshot**, kept unmerged on
+purpose so this branch stays a one-step copy, and it will fall behind.
+
+> **On branches here:** they carry ideas, not staged work, and are not maintained. `self-host` is
+> the kit applied to itself; [`full-delegate`](https://github.com/tahasimse/claude-orchestration-kit/tree/full-delegate)
+> is the delegate-everything variant this kit rejected in favour of a context-aware default (see
+> *Inline vs delegate* in `docs/PLAYBOOK.md`). Being behind `main` is expected of both.
+
 ---
 
 ## Before you start — Claude Code settings
