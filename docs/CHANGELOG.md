@@ -14,7 +14,7 @@
 <!-- New entries go directly below this line. -->
 
 ## 2026-07-29 — The kit runs on itself: live STATE, ADRs 0002–0008, backfilled CHANGELOG ✅
-- **Commit(s):** branch `docs/self-host`
+- **Commit(s):** `fa4fc0f` on branch `docs/self-host`
 - **What:** Resolved the template-versus-project conflict that had kept this repo from following
   its own process. The distributed blanks moved to `docs/templates/state-template.md` and
   `changelog-template.md`; `docs/STATE.md` and `docs/CHANGELOG.md` at their canonical paths are now
