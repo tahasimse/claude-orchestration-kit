@@ -43,12 +43,19 @@ Do NOT read `docs/CHANGELOG.md` in full — it is append-only history. Grep it w
 > This block is the **only** part of CLAUDE.md you edit per project. Do not overwrite the spine above
 > it with project content, and don't restate the protocol here — the protocol's single home is
 > `docs/PLAYBOOK.md`. One home per fact; this file stays thin because it loads into every context.
+>
+> **Filled in below for this repo** — the kit runs on itself (`docs/decisions/0002`). When you copy
+> `CLAUDE.md` into your own project, replace this block with yours; treat it as a worked example,
+> not as content to keep.
 
-- **Stack:** <languages / frameworks>
-- **Build:** `<command>`
-- **Test:** `<command>`
-- **Lint / format:** `<command>`
-- **Run locally:** `<command>`
-- **Gotchas / footguns:** <e.g. "tests need JDK 21, not the default JDK"; "use the project's wrapper, not the global tool">
-- **Conventions:** <commit message style, branch naming, code style, language for code/docs>
-- **Merge flow:** <e.g. "feature branch → PR into develop; never commit to main directly">
+- **Stack:** Markdown + Claude Code configuration (`.claude/agents/`, `.claude/skills/`, `settings.json`). No application code.
+- **Build:** none.
+- **Test:** copy `.claude/`, `docs/` and `CLAUDE.md` into a scratch repo, run `claude`, and confirm the session reads `docs/STATE.md` first and discovers `planner`, `builder`, `reviewer` and `/autopilot`.
+- **Lint / format:** none. Keep prose lines under ~110 columns to match the existing files.
+- **Run locally:** `claude`, from a project root that has the three copied paths.
+- **Gotchas / footguns:**
+  - This repo is both the template and a live project. The blanks people copy live in `docs/templates/` (`state-template.md`, `changelog-template.md`); `docs/STATE.md` and `docs/CHANGELOG.md` are **real**. Never re-blank them to "fix" the template.
+  - `LICENSE` is GPL-3.0 and stays that way until `docs/decisions/0008` is accepted by the copyright holder. Do not swap it on the strength of the ADR alone.
+  - The README's settings section argues against `bypassPermissions`; the `/autopilot` skill assumes it. Known, tracked as `perm-story` in `STATE.md` — don't silently resolve it in one direction.
+- **Conventions:** conventional commits (`docs:`, `feat(skill):`, `fix:`). Docs in English, for shareability. One home per fact — if you find yourself restating the protocol outside `PLAYBOOK.md`, link instead.
+- **Merge flow:** branch off `main` (`docs/…`, `feat/…`), land at Gate 2 with the human. `origin/full-delegate` is the delegate-everything variant (`docs/decisions/0007`), maintained separately.

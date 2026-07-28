@@ -9,6 +9,11 @@ Built from lessons learned coordinating a full microservice project (Angular + S
 persistence + ML bots) entirely through Claude agents. It distills what worked, and fixes what
 didn't.
 
+**This repo runs on the kit.** `docs/STATE.md` is a live work queue with named debt,
+`docs/CHANGELOG.md` is the real task history, and `docs/decisions/` holds the frozen ADRs behind
+every choice below — including the one still open. If you want to know whether the process is worth
+copying, read those three before the prose.
+
 ---
 
 ## Before you start — Claude Code settings
@@ -140,11 +145,26 @@ claude-orchestration-kit/
     ├── CHANGELOG.md          ← append-only history. Never read in full; grep it.
     ├── decisions/            ← frozen ADRs — settled choices, never re-litigated
     │   ├── README.md
-    │   └── 0001-record-architecture-decisions.md
+    │   ├── 0001-record-architecture-decisions.md
+    │   ├── 0002-run-the-kit-on-itself.md
+    │   ├── 0003-one-builder-no-layer-split.md
+    │   ├── 0004-two-human-gates.md
+    │   ├── 0005-memory-layered-by-lifetime.md
+    │   ├── 0006-model-and-power-routing.md
+    │   ├── 0007-inline-vs-delegate-hybrid-default.md
+    │   └── 0008-license-apache-2-0.md        ← proposed, not accepted
     └── templates/
         ├── adr-template.md
-        └── task-brief.md
+        ├── task-brief.md
+        ├── state-template.md       ← the blank you copy over docs/STATE.md
+        └── changelog-template.md   ← the blank you copy over docs/CHANGELOG.md
 ```
+
+> **In this repo, `docs/STATE.md` and `docs/CHANGELOG.md` are real, not blanks.** The kit runs on
+> itself, so they carry a live work queue, named debt and a task history — read them as the worked
+> example, and read `decisions/0002`–`0008` for why the kit is shaped the way it is. The blanks you
+> copy live in `docs/templates/`; step 3 of the install resets them for you. Reasoning:
+> [`decisions/0002`](docs/decisions/0002-run-the-kit-on-itself.md).
 
 ### The memory is layered by lifetime
 The biggest token leak in long projects is one ever-growing status doc that every session
@@ -196,13 +216,23 @@ your-project/
 > **Already have a `.claude/` folder?** Merge, don't overwrite — keep your own `settings.local.json`,
 > and if you already have a `CLAUDE.md`, merge the two rather than clobbering it.
 
-**3. Fill in two files (one-time).**
+**3. Reset the two live files to blanks.** You just copied the kit's *own* STATE and CHANGELOG —
+useful to read, useless as your starting point. Overwrite them with the templates:
+
+```bash
+# still in YOUR project's root folder
+cp docs/templates/state-template.md      docs/STATE.md
+cp docs/templates/changelog-template.md  docs/CHANGELOG.md
+```
+
+**4. Fill in two files (one-time).**
 - `CLAUDE.md` → the **"Project specifics"** block: your build / test / lint / run commands, gotchas,
-  commit + branch conventions. This is what stops every agent from re-discovering how to build your project.
+  commit + branch conventions. This is what stops every agent from re-discovering how to build your
+  project. (It arrives filled in for the kit itself — replace that block with yours.)
 - `docs/STATE.md` → current branch, a one-paragraph state, and the work queue. (Until you do, its
   `<…>` placeholders mark it *uninitialized* — the kit treats that as a "stop and get oriented first" signal.)
 
-**4. Start Claude in the project and hand it a task.** Open a terminal **inside your project folder**
+**5. Start Claude in the project and hand it a task.** Open a terminal **inside your project folder**
 and launch Claude Code:
 
 ```bash
@@ -302,6 +332,11 @@ logged as blocked and skipped, not chewed on all night), and a **morning report*
 ---
 
 ## License
+
+> **Under review.** [`decisions/0008`](docs/decisions/0008-license-apache-2-0.md) proposes moving to
+> Apache-2.0, on the argument that copyleft is the wrong container for a kit whose whole
+> distribution model is "copy these files into your repo." It is **proposed, not accepted** — until
+> it is, what follows is the license in force.
 
 GPL-3.0 — copyleft. You may use, study, share, and modify this kit, but any
 distributed derivative must also be released under the GPL-3.0 and keep its source open.
