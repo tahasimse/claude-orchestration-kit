@@ -18,7 +18,7 @@ same kit, run through its own PLAYBOOK, with a
 [live STATE that names its own debt](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/STATE.md),
 a [real CHANGELOG](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/CHANGELOG.md),
 and [nine frozen ADRs](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host/docs/decisions)
-— including one still open and one superseded by a later decision.
+— including one superseded by a later decision, and the licence change this repo is now under.
 
 Read it to judge the process; install from here. It is a **frozen snapshot**, kept unmerged on
 purpose so this branch stays a one-step copy, and it will fall behind.
