@@ -360,9 +360,5 @@ Copyright 2026 tahasimse. Licensed under the Apache License, Version 2.0. Distri
 
 Chosen over copyleft because the kit's whole distribution model is "paste these files into your
 repo," and a copyleft notice on files you are told to paste is friction paid at every adoption.
-<<<<<<< HEAD
 Reasoning: [`decisions/0008`](docs/decisions/0008-license-apache-2-0.md).
-=======
-Reasoning: [`decisions/0008`](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/decisions/0008-license-apache-2-0.md).
->>>>>>> feat/lessons
 Releases before 2026-07-29 were GPL-3.0; that grant still stands for anyone who took it.
