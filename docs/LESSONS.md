@@ -16,6 +16,8 @@
 > the trail survives the rule.
 >
 > Where a rule belongs, and what earns a place in gotchas: `PLAYBOOK.md` → "Gotchas and lessons".
+>
+> **What a filled one looks like:** [`docs/LESSONS.md` on the `self-host` branch](https://github.com/tahasimse/claude-orchestration-kit/blob/self-host/docs/LESSONS.md) — this kit's own entries, most of them traced to a single run that went wrong.
 
 <!-- New entries go directly below this line, newest on top. -->
 

@@ -15,3 +15,7 @@ Read this folder at session start. If your task conflicts with an `accepted` ADR
 flag it** — do not silently decide otherwise.
 
 Template: [`../templates/adr-template.md`](../templates/adr-template.md).
+
+**Only `0001` ships with the kit**, so your numbering starts at `0002` and this folder holds nobody
+else's decisions. For worked examples — ten ADRs, one of them superseded by a later decision — see
+[`docs/decisions/` on the `self-host` branch](https://github.com/tahasimse/claude-orchestration-kit/tree/self-host/docs/decisions).
